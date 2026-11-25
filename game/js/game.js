@@ -204,13 +204,18 @@ function setupShot(name) {
   if (name === 'start') { state.mode = 'title'; return; }
   state.mode = 'play';
   if (name === 'play') {
-    state.timeLeft = 107; state.coins = 24; state.served = 2; state.streak = 2;
+    state.timeLeft = 88; state.coins = 47; state.served = 4; state.streak = 3;
     state.tickets = [
       { dish: 'burger', patience: 33, maxPatience: 45 },
       { dish: 'salad', patience: 41, maxPatience: 45 },
+      { dish: 'omelette', patience: 24, maxPatience: 45 },
     ];
-    state.plate = [{ id: 'bun', state: 'raw' }, { id: 'cheese', state: 'raw' }];
+    state.plate = [
+      { id: 'bun', state: 'raw' }, { id: 'patty', state: 'cooked' },
+      { id: 'cheese', state: 'raw' },
+    ];
     state.burners[0] = { id: 'patty', t: 4.2, state: 'cooking', cookTime: 6, burnTime: 5, burnT: 0 };
+    state.burners[1] = { id: 'bacon', t: 5, state: 'ready', cookTime: 5, burnTime: 4, burnT: 0 };
     state.passNote = 'Sunny Breakfast served! +$13 (tip $2)';
   } else if (name === 'serve') {
     state.timeLeft = 96; state.coins = 36; state.served = 3; state.streak = 3;

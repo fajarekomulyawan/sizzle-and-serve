@@ -98,7 +98,7 @@ function drawPlateStack(ctx, plate) {
   ctx.beginPath(); ctx.ellipse(x, y + 24, 88, 21, 0, 0, 7); ctx.fill();
   // layers stack upward in the order they were added
   plate.forEach((item, i) => {
-    const ly = y + 16 - i * 15;
+    const ly = y + 18 - i * 13;
     if (item.id === 'bun' && i === plate.length - 1 && plate.length > 1) {
       // a bun on top of a stack is the dome lid
       ctx.fillStyle = INGREDIENTS.bun.color; ctx.strokeStyle = INGREDIENTS.bun.dark; ctx.lineWidth = 2;
@@ -172,6 +172,15 @@ function drawKitchen(ctx, state, now) {
   ctx.strokeStyle = 'rgba(160,125,70,.25)'; ctx.lineWidth = 2;
   for (let x = 0; x < VIEW.w; x += 64) { ctx.beginPath(); ctx.moveTo(x, 150); ctx.lineTo(x, 280); ctx.stroke(); }
   ctx.fillStyle = '#a96f2c'; ctx.fillRect(0, 268, VIEW.w, 14);
+  // hanging lamps over the kitchen
+  [300, 640, 980].forEach(lx => {
+    ctx.strokeStyle = '#6b4a22'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(lx, 150); ctx.lineTo(lx, 176); ctx.stroke();
+    ctx.fillStyle = '#e0a81e';
+    ctx.beginPath(); ctx.moveTo(lx - 20, 200); ctx.lineTo(lx + 20, 200); ctx.lineTo(lx + 9, 176); ctx.lineTo(lx - 9, 176); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = 'rgba(255,205,80,.9)';
+    ctx.beginPath(); ctx.arc(lx, 204, 6, 0, 7); ctx.fill();
+  });
   // jars on the shelf
   ['#e5484d', '#7bc950', '#ffc93c', '#7ae0ff'].forEach((c, i) => {
     const jx = 470 + i * 62;
@@ -213,8 +222,18 @@ function drawKitchen(ctx, state, now) {
   ctx.fillStyle = '#6b4a22'; ctx.font = '700 18px system-ui';
   ctx.fillText('THE PASS — finished plates', ps.x + 14, ps.y + 26);
   ctx.font = '600 16.5px system-ui'; ctx.fillStyle = '#7a6a52';
-  ctx.fillText(state.passNote, ps.x + 28, ps.y + 84);
-  ctx.fillText('Tip grows while patience is high.', ps.x + 28, ps.y + 110);
+  ctx.fillText(state.passNote, ps.x + 92, ps.y + 84);
+  ctx.fillText('Tip grows while patience is high.', ps.x + 92, ps.y + 110);
+  // the chef, watching the pass
+  ctx.fillStyle = '#fdfbf6';
+  ctx.beginPath(); ctx.arc(ps.x + 52, ps.y + 128, 21, 0, 7); ctx.fill();
+  ctx.fillStyle = '#f0c8a0';
+  ctx.beginPath(); ctx.arc(ps.x + 52, ps.y + 134, 14, 0, 7); ctx.fill();
+  ctx.fillStyle = '#fdfbf6';
+  ctx.beginPath(); ctx.ellipse(ps.x + 52, ps.y + 114, 17, 10, 0, Math.PI, 0); ctx.closePath(); ctx.fill();
+  ctx.fillRect(ps.x + 35, ps.y + 112, 34, 6);
+  ctx.fillStyle = '#3a2e22';
+  ctx.beginPath(); ctx.arc(ps.x + 47, ps.y + 134, 1.8, 0, 7); ctx.arc(ps.x + 57, ps.y + 134, 1.8, 0, 7); ctx.fill();
   // service bell
   ctx.fillStyle = '#d9d4c8'; ctx.beginPath(); ctx.ellipse(ps.x + ps.w - 62, ps.y + ps.h - 44, 26, 15, 0, Math.PI, 0); ctx.closePath(); ctx.fill();
   ctx.fillStyle = '#8f8a7d'; ctx.fillRect(ps.x + ps.w - 84, ps.y + ps.h - 44, 44, 6);
@@ -222,6 +241,11 @@ function drawKitchen(ctx, state, now) {
   // plate zone label
   ctx.fillStyle = '#6b4a22'; ctx.font = '700 18px system-ui'; ctx.textAlign = 'center';
   ctx.fillText('YOUR PLATE', LAYOUT.plate.x, 330);
+
+  // floor boards between the kitchen block and the counter
+  ctx.fillStyle = '#d9b77c'; ctx.fillRect(0, 492, VIEW.w, 88);
+  ctx.strokeStyle = 'rgba(150,101,47,.4)'; ctx.lineWidth = 2;
+  for (let x = 0; x < VIEW.w; x += 92) { ctx.beginPath(); ctx.moveTo(x, 492); ctx.lineTo(x, 580); ctx.stroke(); }
 
   // counter (wood) + bins
   ctx.fillStyle = '#b07a3f'; ctx.fillRect(0, 580, VIEW.w, 220);

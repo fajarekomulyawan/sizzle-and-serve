@@ -24,6 +24,7 @@ const RECIPES = {
   breakfast: { name: 'Sunny Breakfast', price: 11, items: ['toast', 'egg', 'bacon'] },
   blt:       { name: 'Garden BLT',      price: 10, items: ['toast', 'bacon', 'lettuce', 'tomato'] },
   salad:     { name: 'Chef Salad',      price: 8,  items: ['lettuce', 'tomato', 'cheese'] },
+  omelette:  { name: 'Omelette', price: 11, items: ['egg', 'cheese', 'tomato'] },
 };
 
 const RECIPE_KEYS = Object.keys(RECIPES);
